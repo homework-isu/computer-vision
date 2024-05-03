@@ -80,7 +80,6 @@ class App:
 
         for i in range(self.object.shape[0]):
             f = Cam @ P @ self.object[i, :]
-            print(f)
             if f[2] == 0:
                 dots.append(f)
                 continue
@@ -176,11 +175,15 @@ class App:
     def create(self, name, original_meaning="0.0", from_=0, to=10):
 
         label = ttk.Label(self.center_frame, text=name)
+        min_label = ttk.Label(self.center_frame, text=f"{from_}")
+        max_label = ttk.Label(self.center_frame, text=f"{to}")
         label.grid(row=self.row, column=0, padx=10, pady=5)
+        min_label.grid(row=self.row, column=1, padx=5, pady=5)
         slider = ttk.Scale(self.center_frame, from_=from_, to=to, command=lambda x: self.update_from_slider(slider, entry))
-        slider.grid(row=self.row, column=1, padx=10, pady=5)
+        slider.grid(row=self.row, column=2, padx=10, pady=5)
+        max_label.grid(row=self.row, column=3, padx=5, pady=5)
         entry = ttk.Entry(self.center_frame)
-        entry.grid(row=self.row, column=2, padx=10, pady=5)
+        entry.grid(row=self.row, column=4, padx=10, pady=5)
         entry.insert(0, original_meaning)
         entry.bind("<FocusIn>", self.select_all)
 
